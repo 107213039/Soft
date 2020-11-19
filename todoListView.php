@@ -58,6 +58,9 @@ while (	$rs=mysqli_fetch_assoc($result)) {
 	echo "<td>" , htmlspecialchars($rs['Dad']), "</td>";
     echo "<td>" , htmlspecialchars($rs['Mom']), "</td>";
     echo "<td>" , htmlspecialchars($rs['FundType']), "</td>";
+    if ($bossMode==0){
+        echo "<td>" , htmlspecialchars($rs['Tsing']), "</td>";
+    }
 	echo "</td></tr>";
 }
 ?>
