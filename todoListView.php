@@ -39,7 +39,7 @@ $result=getJobList($bossMode);
 <hr />
 <div><?php echo $msg; ?></div><hr>
 <a href="loginForm.php">login</a> | <a href="todoEditForm.php?id=-1">Add Task</a> <br>
-<table width="700" border="1">
+<table width="1000" border="1">
   <tr>
     <td>編號</td>
     <td>姓名</td>
