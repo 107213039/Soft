@@ -22,10 +22,7 @@ if (isset($_GET['m'])){
 	$msg="Good morning";
 }
 
-
-
 $result=getJobList($bossMode);
-$jobStatus = array('未完成','已完成','已結案','已取消');
 
 
 ?>
@@ -42,63 +39,25 @@ $jobStatus = array('未完成','已完成','已結案','已取消');
 <hr />
 <div><?php echo $msg; ?></div><hr>
 <a href="loginForm.php">login</a> | <a href="todoEditForm.php?id=-1">Add Task</a> <br>
-<table width="200" border="1">
+<table width="700" border="1">
   <tr>
-    <td>id</td>
-    <td>title</td>
-    <td>message</td>
-	<td>Urgency</td>
-    <td>status</td>
-	<td>time used</td>
+    <td>編號</td>
+    <td>姓名</td>
+    <td>學號</td>
+	<td>爸爸</td>
+    <td>媽媽</td>
+	<td>申請種類</td>
 	<td>-</td>
   </tr>
 <?php
 
 while (	$rs=mysqli_fetch_assoc($result)) {
-	switch($rs['urgent']) {
-		case '緊急':
-			$bgColor="#ff9999";
-			$timeLimit = 60;
-			break;
-		case '重要':
-			$bgColor="#99ff99";
-			$timeLimit = 120;
-			break;
-		default:
-			$bgColor="#ffffff";
-			$timeLimit = 180;
-			break;
-	}
-
-	if ($rs['diff']>$timeLimit) {
-		$fontColor="red";
-	} else {
-		$fontColor="black";		
-	}
-
-	echo "<tr style='background-color:$bgColor;'><td>" . $rs['id'] . "</td>";
-	echo "<td>{$rs['title']}</td>";
-	echo "<td>" , htmlspecialchars($rs['content']), "</td>";
-	echo "<td>" , htmlspecialchars($rs['urgent']), "</td>";
-	echo "<td>{$jobStatus[$rs['status']]}</td>" ;
-	echo "<td><font color='$fontColor'>{$rs['diff']}</font></td><td>";
-	switch($rs['status']) {
-		case 0:
-			if ($bossMode) {
-				echo "<a href='todoEditForm.php?id={$rs['id']}'>Edit</a>  ";	
-				echo "<a href='todoSetControl.php?act=cancel&id={$rs['id']}'>Cancel</a>  " ;
-			} else {
-				echo "<a href='todoSetControl.php?act=finish&id={$rs['id']}'>Finish</a>  ";
-			}
-
-			break;
-		case 1:
-			echo "<a href='todoSetControl.php?act=reject&id={$rs['id']}'>Reject</a>  ";
-			echo "<a href='todoSetControl.php?act=close&id={$rs['id']}'>Close</a>  ";
-			break;
-		default:
-			break;
-	}
+	echo "<td>" , htmlspecialchars($rs['applied']), "</td>";
+    echo "<td>" , htmlspecialchars($rs['StdName']), "</td>";
+	echo "<td>" , htmlspecialchars($rs['StdID']), "</td>";
+	echo "<td>" , htmlspecialchars($rs['Dad']), "</td>";
+    echo "<td>" , htmlspecialchars($rs['Mom']), "</td>";
+    echo "<td>" , htmlspecialchars($rs['FundType']), "</td>";
 	echo "</td></tr>";
 }
 ?>
